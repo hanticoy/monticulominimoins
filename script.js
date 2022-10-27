@@ -17,11 +17,11 @@ function insertIntoHeap(arr, val) {
 
         valor = arr[i];
 
-        if (arr[i - 1] > arr[i]) { 
+        if (arr[i - 1] > arr[i]) {
             arr[i] = arr[i - 1];
             arr[i - 1] = valor;
         }
-        else{
+        else {
             break; //esto es para acelerar un poco el proceso
         }
         i--;
@@ -30,23 +30,63 @@ function insertIntoHeap(arr, val) {
     return arr;
 }
 
-
+console.log('METODO RECORRIDO COMPLETO, MAS COSTOSO EN TIEMPO PERO PARA DEJAR SIEMPRE ORDENADO');
 //pruebas unitarias para agregar valores distintos al arreglo y que se posicionen correctamente
 let arrMonticulo = [];
-let mitexto ="";
-mitexto = mitexto + '<p> insertamos: ' + 15 + ' -->[' +   insertIntoHeap(arrMonticulo, 15) + ']<p>';
-mitexto = mitexto + '<p> insertamos: ' + 12 + ' -->[' +   insertIntoHeap(arrMonticulo, 12) + ']<p>';
-mitexto = mitexto + '<p> insertamos: ' + 99 + ' -->[' +   insertIntoHeap(arrMonticulo, 99) + ']<p>';
-mitexto = mitexto + '<p> insertamos: ' + 3 + ' -->[' +   insertIntoHeap(arrMonticulo, 3) + ']<p>';
+
+console.log('insertamos: ' + 15 + ' -->[' + insertIntoHeap(arrMonticulo, 15) + ']');
+console.log('insertamos: ' + 30 + ' -->[' + insertIntoHeap(arrMonticulo, 30) + ']');
+console.log('insertamos: ' + 3 + ' -->[' + insertIntoHeap(arrMonticulo, 3) + ']');
 
 //podriamos hacer lo mismo para agregar aleatoriamente valores numericos y que los
 //numeros se posicionen segun la regla de monticulo minimo
 
-for (var i = 1; i <20; i++) {
+for (var i = 1; i < 5; i++) {
     valor = Math.floor(Math.random() * 300);
-    mitexto = mitexto + '<p> insertamos: ' + valor + ' -->[' +   insertIntoHeap(arrMonticulo, valor) + ']<p>';
+    console.log('insertamos: ' + valor + ' -->[' + insertIntoHeap(arrMonticulo, valor) + ']');
 }
 
-let mydata= document.querySelector('.data');
-mydata.innerHTML =  mitexto;
 
+console.log('');
+
+console.log('METODO REFINADO: PARA DEJAR EL VALOR INGRESADO EL LA POSICIÓN MINIMA POSIBLE');
+function MinHeap() {
+    this.Arreglo = [];
+    this.insert = function (val) {
+       
+        // console.log('entro:' + val)
+        if (this.Arreglo.length == 0) { 
+            this.Arreglo.push(undefined); 
+            this.Arreglo.push(val);
+
+            // console.log('entro:' + val + ' lo agrego:' + this.Arreglo);
+            return;
+        }
+        
+        this.Arreglo.push(val)
+        // console.log('entro:' + val + ' lo agrego:' + this.Arreglo);
+
+        let indice = this.Arreglo.length - 1;
+        let indicepadre = Math.trunc(indice/2);
+
+        // console.log('evalua:' + (this.Arreglo[indicepadre] > this.Arreglo[indice]));
+
+        while (this.Arreglo[indicepadre] > this.Arreglo[indice]) {
+            this.Arreglo[indice] = this.Arreglo[indicepadre]; 
+            this.Arreglo[indicepadre] = val;
+            indice = indicepadre;
+            indicepadre = Math.trunc(indice/2);
+        }
+
+        // console.log('salio:' + this.Arreglo);
+    }
+}
+
+let myMinHeap = new MinHeap();
+myMinHeap.Arreglo = [];
+
+for (var i = 1; i < 10; i++) {
+    valor = Math.floor(Math.random() * i);
+    myMinHeap.insert(valor);
+}
+console.log(myMinHeap.Arreglo);
