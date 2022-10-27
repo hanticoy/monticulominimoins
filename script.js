@@ -1,3 +1,5 @@
+
+
 function insertIntoHeap(arr, val) {
 
     //Comprueba si el array está vacío y que nunca se ha colocado nada en el índice 0.   
@@ -31,16 +33,20 @@ function insertIntoHeap(arr, val) {
 
 //pruebas unitarias para agregar valores distintos al arreglo y que se posicionen correctamente
 let arrMonticulo = [];
-console.log('insertamos: ' + 18 + ' -->' +  insertIntoHeap(arrMonticulo, 18));
-console.log('insertamos: ' + 2 + ' -->' +  insertIntoHeap(arrMonticulo, 2));
-console.log('insertamos: ' + 21 + ' -->' +  insertIntoHeap(arrMonticulo, 21));
-console.log('insertamos: ' + 4 + ' -->' +  insertIntoHeap(arrMonticulo, 4));
-console.log('insertamos: ' + 7 + ' -->' +  insertIntoHeap(arrMonticulo, 7));
-console.log('insertamos: ' + 10 + ' -->' +  insertIntoHeap(arrMonticulo, 10));
+let mitexto ="";
+mitexto = mitexto + '<p> insertamos: ' + 15 + ' -->[' +   insertIntoHeap(arrMonticulo, 15) + ']<p>';
+mitexto = mitexto + '<p> insertamos: ' + 12 + ' -->[' +   insertIntoHeap(arrMonticulo, 12) + ']<p>';
+mitexto = mitexto + '<p> insertamos: ' + 99 + ' -->[' +   insertIntoHeap(arrMonticulo, 99) + ']<p>';
+mitexto = mitexto + '<p> insertamos: ' + 3 + ' -->[' +   insertIntoHeap(arrMonticulo, 3) + ']<p>';
 
 //podriamos hacer lo mismo para agregar aleatoriamente valores numericos y que los
 //numeros se posicionen segun la regla de monticulo minimo
+
 for (var i = 1; i <20; i++) {
     valor = Math.floor(Math.random() * 300);
-    console.log('insertamos: ' + valor + ' -->' +   insertIntoHeap(arrMonticulo, valor));
+    mitexto = mitexto + '<p> insertamos: ' + valor + ' -->[' +   insertIntoHeap(arrMonticulo, valor) + ']<p>';
 }
+
+let mydata= document.querySelector('.data');
+mydata.innerHTML =  mitexto;
+
